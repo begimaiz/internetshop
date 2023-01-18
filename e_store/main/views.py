@@ -43,13 +43,12 @@ def shop_single(request):
 def product_detail(request, product_id):
     product = Product.objects.get(id=product_id)
     context = {'product': product}
-    return render(request, 'shop-single.html', context)
-
+    return render(request, 'main/shop-single.html', context)
 
 def product_list(request):
     products = Product.objects.all()
     products = Product.objects.all()
-    paginator = Paginator(products, 9)  # Show 9 products per page
+    paginator = Paginator(products, 6)  # Show 9 products per page
     page = request.GET.get('page')
     products = paginator.get_page(page)
     return render(request, 'main/shop.html', {'products': products})

@@ -199,12 +199,12 @@ https://templatemo.com/tm-559-zay-shop
 <!--products start here-->
 
 
-                    {% for product in products|slice:":9" %}
+                    {% for product in products|slice:":6" %}
 <!--    <p>Rating: {{ product.rating }}</p>-->
                     <div class="col-md-4">
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
-                                <p>{{ product.image.url }}</p>
+
                                <img class="card-img rounded-0 img-fluid" src= '{{ product.image.url }}' alt='{{ product.name }}'>
                                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul class="list-unstyled">
@@ -215,7 +215,8 @@ https://templatemo.com/tm-559-zay-shop
                                 </div>
                             </div>
                             <div class="card-body">
-                                <a href="shop-single.html" class="h3 text-decoration-none">{{ product.name }}</a>
+                                <a href="{% url 'product_detail' product.id %}" class="h3 text-decoration-none">{{ product.name }}</a>
+
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                     <li>M/L/X/XL</li>
                                     <li class="pt-2">
@@ -235,7 +236,7 @@ https://templatemo.com/tm-559-zay-shop
                                         <i class="text-muted fa fa-star"></i>
                                     </li>
                                 </ul>
-                                <p class="text-center mb-0">${{ product.price }}</p>
+                                <p class="text-center mb-0">{{ product.price }} C </p>
                             </div>
                         </div>
                     </div>

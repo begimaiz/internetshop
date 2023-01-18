@@ -12,6 +12,6 @@ class Product(models.Model):
     description = models.TextField()
     available_colors = models.CharField(max_length=255)
     specification = models.TextField()
-    image = models.ImageField(default='', upload_to='assets/img/products/')
+    image = models.ImageField(default='', upload_to='static/assets/img/products')
 
 
