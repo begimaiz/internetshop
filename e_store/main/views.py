@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm
-# Create your views here.
+from .models import Product
+from django.core.paginator import Paginator
 
 
 def main(request):
@@ -37,3 +38,18 @@ def shop(request):
 
 def shop_single(request):
     return render(request, 'main/shop-single.html')
+
+
+def product_detail(request, product_id):
+    product = Product.objects.get(id=product_id)
+    context = {'product': product}
+    return render(request, 'shop-single.html', context)
+
+
+def product_list(request):
+    products = Product.objects.all()
+    products = Product.objects.all()
+    paginator = Paginator(products, 9)  # Show 9 products per page
+    page = request.GET.get('page')
+    products = paginator.get_page(page)
+    return render(request, 'main/shop.html', {'products': products})
