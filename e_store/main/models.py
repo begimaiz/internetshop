@@ -1,8 +1,6 @@
+from django.contrib.auth.models import AbstractUser, User
 from django.db import models
 
-# def product_image_path(instance, filename):
-#     # file will be uploaded to MEDIA_ROOT/products/<product_name>/<filename>
-#     return 'products/{0}/{1}'.format(instance.name, filename)
 class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -14,4 +12,11 @@ class Product(models.Model):
     specification = models.TextField()
     image = models.ImageField(default='', upload_to='static/assets/img/products')
 
-
+class Customer(models.Model):
+    user = models.OneToOneField(User, default='2', on_delete=models.CASCADE)
+    phone_number = models.CharField(default=' ', max_length=20)
+    address = models.TextField(default=' ')
+    username = models.CharField(max_length=100, unique=True)
+    email = models.EmailField(max_length=100, unique=True)
+    password = models.CharField(max_length=100)
+    # other fields
