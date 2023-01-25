@@ -1,7 +1,6 @@
 from django import forms
-from django.shortcuts import redirect, render
-
 from .models import Customer
+
 
 # class LoginForm(UserCreationForm):
 #     class Meta:
@@ -41,8 +40,13 @@ class RegisterForm(forms.ModelForm):
         return data
 
 
-
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
+class ContactForm(forms.Form):
+    first_name = forms.CharField(max_length=50)
+    last_name = forms.CharField(max_length=50)
+    email_address = forms.EmailField(max_length=150)
+    message = forms.CharField(widget=forms.Textarea,
+                              max_length=2000)
