@@ -42,12 +42,18 @@ def product_detail(request, product_id):
 
 def product_list(request):
     products = Product.objects.all()
-    paginator = Paginator(products, 6)  # Show 9 products per page
+    paginator = Paginator(products, 6)  # Show 6 products per page
     page = request.GET.get('page')
     products = paginator.get_page(page)
     return render(request, 'main/shop.html', {'products': products})
 
 
+def filter_products(request, category):
+    products = Product.objects.filter(category=category).order_by('name')
+    paginator = Paginator(products, 6) # Show 6 products per page
+    page = request.GET.get('page')
+    products = paginator.get_page(page)
+    return render(request, 'main/shop.html', {'products': products})
 
 def register(request):
     if request.method == 'POST':
@@ -72,6 +78,7 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'main/register.html', {'form': form})
+
 
 def login(request):
     if request.method == 'POST':
@@ -119,6 +126,7 @@ def contact_view(request):
 
     return render(request, 'contact.html')
 
+
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -145,9 +153,3 @@ def contact(request):
     form = ContactForm()
     return render(request, "main/contact.html", {'form': form})
 
-
-def filter_products(request, category):
-    products = Product.objects.filter(category=category).order_by('name')
-    for i in products:
-        print(i.name)
-    return render(request, 'main/shop.html', {'products': products})

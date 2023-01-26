@@ -53,23 +53,23 @@
                                 <a class="h3 text-dark text-decoration-none mr-3" href="{% url 'product_list' %}">All</a>
                             </li>
                             <li class="list-inline-item">
-                                 <a class="h3 text-dark text-decoration-none mr-3" href="{% url 'filter_products' category='Mains' %}">Mains</a>
+                                 <a class="h3 text-dark text-decoration-none mr-3" href="{% url 'filter_products' category='MA' %}">Mains</a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='Soups' %}">Soups</a>
+                                <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='SO' %}">Soups</a>
                             </li>
                              <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='Sides' %}">Sides</a>
+                                <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='SI' %}">Sides</a>
                             </li>
                              <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='Soups' %}">Salads</a>
+                                <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='SA' %}">Salads</a>
                             </li>
                              <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='Desserts' %}">Desserts</a>
+                                <a class="h3 text-dark text-decoratinone" href="{% url 'filter_products' category='DE' %}">Desserts</a>
                             </li>
                              <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='Drinks' %}">Drinks</a>
-
+                                <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='DR' %}">Drinks</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-md-6 pb-4">
@@ -128,19 +128,7 @@
                         </div>
                     </div>
                     {% endfor %}
-<div class="row">
-    {% for product in products %}
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.price }}</p>
-                <p class="card-text">{{ product.category }}</p>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
+
                 </div>
 
                 <div div="row">
