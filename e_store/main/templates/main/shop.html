@@ -4,12 +4,10 @@
 {% load static %}
    <!-- Start Content -->
 
-
     <div class="container py-5">
         <div class="row">
 
             <div class="col-lg-3">
-
                 <h1 cla+ss="h2 pb-4">Categories</h1>
                 <ul class="list-unstyled templatemo-accordion">
                     <li class="pb-3">
@@ -50,45 +48,37 @@
             <div class="col-lg-9">
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="category">Categories</label>
-                        <ul id="category" class="list-inline shop-top-menu pb-3 pt-1">
-                            <li value='AL' class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3"  href="{% url 'product_list' %}">All</a>
+                        <ul class="list-inline shop-top-menu pb-3 pt-1">
+                            <li class="list-inline-item">
+                                <a class="h3 text-dark text-decoration-none mr-3" href="{% url 'product_list' %}">All</a>
                             </li>
-                            <li value='MA' class="list-inline-item">
-                                 <a class="h3 text-dark text-decoration-none mr-3"  href="{% url 'filter_products' category='MA' %}">Mains</a>
+                            <li class="list-inline-item">
+                                 <a class="h3 text-dark text-decoration-none mr-3" href="{% url 'filter_products' category='MA' %}">Mains</a>
                             </li>
-                            <li value='SO' class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none"  href="{% url 'filter_products' category='SO' %}">Soups</a>
+                            <li class="list-inline-item">
+                                <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='SO' %}">Soups</a>
                             </li>
-                             <li value='SI' class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none"   href="{% url 'filter_products' category='SI' %}">Sides</a>
+                             <li class="list-inline-item">
+                                <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='SI' %}">Sides</a>
                             </li>
-                             <li value='SA' class="list-inline-item">
+                             <li class="list-inline-item">
                                 <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='SA' %}">Salads</a>
                             </li>
-                             <li value='DE' class="list-inline-item">
-                                <a class="h3 text-dark text-decoratinone"  href="{% url 'filter_products' category='DE' %}">Desserts</a>
+                             <li class="list-inline-item">
+                                <a class="h3 text-dark text-decoratinone" href="{% url 'filter_products' category='DE' %}">Desserts</a>
                             </li>
-                             <li value='DR' class="list-inline-item">
+                             <li class="list-inline-item">
                                 <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='DR' %}">Drinks</a>
                             </li>
                         </ul>
                     </div>
-
                     <div class="col-md-6 pb-4">
                         <div class="d-flex">
-                            <form>
-                              <label for="sort">Sort By:</label>
-                              <select id="sort" name="sort">
-                                <option value="name_asc">Name (A-Z)</option>
-                                <option value="name_desc">Name (Z-A)</option>
-                                <option value="price_asc">Price (Low-High)</option>
-                                <option value="price_desc">Price (High-Low)</option>
-                                <option value="rating_asc">Rating (Low-High)</option>
-                                <option value="rating_desc">Rating (High-Low)</option>
-                              </select>
-                            </form>
+                            <select class="form-control">
+                                <option>Featured</option>
+                                <option>A to Z</option>
+                                <option>Item</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -98,7 +88,7 @@
 
                     {% for product in products|slice:":6" %}
 <!--    <p>Rating: {{ product.rating }}</p>-->
-                    <div  class="col-md-4">
+                    <div class="col-md-4">
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
 
@@ -166,33 +156,5 @@
     </div>
     <!-- End Content -->
 
-
-{% endblock %}
-
-{% block scripts %}
-<!-- include jQuery library -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- include your custom script -->
-<script>
-  function updateProducts() {
-    var sortValue = $("#sort").val();
-    let path = window.location.pathname;
-    let category = path.split('/')[2];
-    $.ajax({
-      type: "GET",
-      url: "/filter-sort/",
-      data: {'sort_value': sortValue, 'category': category},
-      success: function(data) {
-        $("#body-id").html(data);
-      }
-    });
-  }
-
-  $(document).ready(function(){
-    $("#sort").change(updateProducts);
-    $("#category").change(updateProducts);
-  });
-</script>
 
 {% endblock %}
