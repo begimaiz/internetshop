@@ -41,7 +41,7 @@ def product_detail(request, product_id):
 
 
 def product_list(request):
-    products = Product.objects.all()
+    products = Product.objects.order_by('name')
     paginator = Paginator(products, 6)  # Show 6 products per page
     page = request.GET.get('page')
     products = paginator.get_page(page)
@@ -54,6 +54,35 @@ def filter_products(request, category):
     page = request.GET.get('page')
     products = paginator.get_page(page)
     return render(request, 'main/shop.html', {'products': products})
+
+
+def filter_sort(request):
+    # print('called filter_sort')
+    sort = request.GET.get('sort_value')
+    category = request.GET.get('category')
+    # print(sort, category)
+    if sort == 'name_asc':
+        products = Product.objects.filter(category=category).order_by('name')
+    elif sort == 'name_desc':
+        products = Product.objects.filter(category=category).order_by('-name')
+    elif sort == 'price_asc':
+        products = Product.objects.filter(category=category).order_by('price')
+    elif sort == 'price_desc':
+        products = Product.objects.filter(category=category).order_by('-price')
+    elif sort == 'rating_asc':
+        products = Product.objects.filter(category=category).order_by('rating')
+    elif sort == 'rating_desc':
+        products = Product.objects.filter(category=category).order_by('-rating')
+    else:
+        products = Product.objects.filter(category=category)
+
+    paginator = Paginator(products, 6)  # Show 6 products per page
+    page = request.GET.get('page')
+    products = paginator.get_page(page)
+    # for i in products:
+    #     print(i.name)
+    return render(request, 'main/shop.html', {'products': products})
+
 
 def register(request):
     if request.method == 'POST':

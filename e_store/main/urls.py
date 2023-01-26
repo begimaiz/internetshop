@@ -16,6 +16,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('shop/<str:category>/', views.filter_products, name='filter_products'),
-
+    path('filter-sort/', views.filter_sort, name='filter_sort'),
 
 ]
