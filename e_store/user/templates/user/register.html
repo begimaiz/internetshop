@@ -27,8 +27,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       <div class="agileits-top">
 
         <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+            {% csrf_token %}
+            {{ form.as_p }}
+
 
           <div class="wthree-text">
             <label class="anim">
@@ -37,7 +38,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </label>
             <div class="clear"> </div>
           </div>
-
+{% csrf_token %}
           <input type="submit" value="Register">
 
         </form>

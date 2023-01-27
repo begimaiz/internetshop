@@ -1,44 +1,39 @@
 from django import forms
+# from django.contrib.auth.forms import UserCreationForm
+# from core.views import SignUpView
+# from django.urls import reverse_lazy
+
 from .models import Customer
-
-
-# class LoginForm(UserCreationForm):
+#
+# class RegisterForm(UserCreationForm):
+#     email = forms.EmailField()
+#     password1 = forms.PasswordInput()
+#     password2 = forms.PasswordInput()
+#
 #     class Meta:
-#         model = User
-#         fields = ['username', 'email', 'password1', 'password2']
-
-class RegisterForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
-
-
-
-    class Meta:
-        model = Customer
-        fields = ('username', 'email', 'password')
-
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        qs = Customer.objects.filter(username=username)
-        if qs.exists():
-            raise forms.ValidationError("username is taken")
-        return username
-
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        qs = Customer.objects.filter(email=email)
-        if qs.exists():
-            raise forms.ValidationError("email is taken")
-        return email
-
-    def clean(self):
-        data = self.cleaned_data
-        password = self.cleaned_data.get('password')
-        password2 = self.cleaned_data.get('password2')
-        if password2 != password:
-            raise forms.ValidationError("Passwords must match.")
-        return data
-
+#         model = Customer
+#         fields = ('username', 'email', 'password1', 'password2')
+#
+#
+# class RegisterView(RegistrationView):
+#     form_class = RegisterForm
+#     template_name = 'main/register.html'
+#     success_url = reverse_lazy('index')
+#
+#     def form_valid(self, form):
+#         email = form.cleaned_data.get('email')
+#         username = form.cleaned_data.get('username')
+#         new_customer = Customer.objects.create(user=self.request.user, email=email, username=username)
+#         return super().form_valid(form)
+#
+#     def form_invalid(self, form):
+#         email = form.cleaned_data.get('email')
+#         username = form.cleaned_data.get('username')
+#         if Customer.objects.filter(email=email).exists():
+#             form.add_error('email', 'email already exists')
+#         if Customer.objects.filter(username=username).exists():
+#             form.add_error('username', 'username already exists')
+#         return super().form_invalid(form)
 
 class LoginForm(forms.Form):
     username = forms.CharField()

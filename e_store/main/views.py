@@ -2,9 +2,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage, BadHeaderError, send_mail
 from django.http import HttpResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
-from .forms import RegisterForm
 from .models import Product, Customer
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
@@ -15,19 +14,18 @@ from . import forms
 from mycart import views
 
 
-
 def index(request):
-    return render(request, 'main/index.html')
+    products = Product.objects.order_by('name')
+
+    return render(request, 'main/index.html', {'products': products})
+
 
 def main(request):
-    return render(request, 'main/index.html')
+    products = Product.objects.order_by('name')
+    return render(request, 'main/index.html', {'products': products})
 
 def about(request):
     return render(request, 'main/about.html')
-#
-# def contact(request):
-#     return render(request, 'main/contact.html')
-#
 
 
 def shop_single(request):
@@ -56,23 +54,32 @@ def filter_products(request, category):
     return render(request, 'main/shop.html', {'products': products})
 
 
+def filter_objects(sort, category):
+    if category =='AL':
+        return Product.objects.order_by(sort)
+    else:
+        return Product.objects.filter(category=category).order_by(sort)
+
+
 def filter_sort(request):
     # print('called filter_sort')
     sort = request.GET.get('sort_value')
     category = request.GET.get('category')
-    # print(sort, category)
+    if category == '':
+        category = 'AL'
+    print(sort, category)
     if sort == 'name_asc':
-        products = Product.objects.filter(category=category).order_by('name')
+        products = filter_objects('name', category)
     elif sort == 'name_desc':
-        products = Product.objects.filter(category=category).order_by('-name')
+        products = filter_objects('-name', category)
     elif sort == 'price_asc':
-        products = Product.objects.filter(category=category).order_by('price')
+        products = filter_objects('price', category)
     elif sort == 'price_desc':
-        products = Product.objects.filter(category=category).order_by('-price')
+        products = filter_objects('-price', category)
     elif sort == 'rating_asc':
-        products = Product.objects.filter(category=category).order_by('rating')
+        products = filter_objects('rating', category)
     elif sort == 'rating_desc':
-        products = Product.objects.filter(category=category).order_by('-rating')
+        products = filter_objects('-rating', category)
     else:
         products = Product.objects.filter(category=category)
 
@@ -82,78 +89,6 @@ def filter_sort(request):
     # for i in products:
     #     print(i.name)
     return render(request, 'main/shop.html', {'products': products})
-
-
-def register(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            if User.objects.filter(username=username).exists():
-                form.add_error('username', 'username already exists')
-                return render(request, 'main/register.html', {'form': form})
-            elif Customer.objects.filter(email=email).exists():
-                form.add_error('email', 'email already exists')
-                return render(request, 'main/register.html', {'form': form})
-            elif Customer.objects.filter(username=username).exists():
-                form.add_error('username', 'username already exists')
-                return render(request, 'main/register.html', {'form': form})
-            else:
-                new_user = User.objects.create_user(username, email, password)
-                new_customer = Customer.objects.create(user=new_user, email=email, username=username)
-                return redirect(reverse('index'))
-    else:
-        form = RegisterForm()
-    return render(request, 'main/register.html', {'form': form})
-
-
-def login(request):
-    if request.method == 'POST':
-        form = forms.LoginForm(request.POST)
-        if form.is_valid():
-            user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            if user is not None:
-                auth.login(request, user)
-                messages.success(request, 'You are now logged in')
-                return redirect('index')
-            else:
-                messages.error(request, 'Invalid credentials')
-    else:
-        form = forms.LoginForm()
-    return render(request, 'main/login.html', {'form': form})
-
-
-def contact_view(request):
-    if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        subject = request.POST['subject']
-        message = request.POST['message']
-        # try:
-        #     email = EmailMessage(
-        #         subject,
-        #         message,
-        #         'Your Name <from_email@example.com>',
-        #         ['to_email@example.com'],
-        #         ['bcc_email@example.com'],
-        #         reply_to=[email],
-        #         )
-        #     email.send()
-        #     return redirect('success')
-        # except:
-        #     return redirect('fail')
-        #
-        send_mail(
-            subject,
-            message,
-            email,
-            ['zulpukarovabegimai@gmail.com'],
-            fail_silently=False,
-        )
-
-    return render(request, 'contact.html')
 
 
 def contact(request):
@@ -181,4 +116,3 @@ def contact(request):
 
     form = ContactForm()
     return render(request, "main/contact.html", {'form': form})
-

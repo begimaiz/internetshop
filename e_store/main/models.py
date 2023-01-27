@@ -9,6 +9,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     # -------CATEGORY-------->
+    ALL = 'AL'
     MAINS = 'MA'
     SOUPS = 'SO'
     SIDES = 'SI'
@@ -16,6 +17,7 @@ class Product(models.Model):
     SALADS = 'SA'
     DRINKS = 'DR'
     CATEGORY_CHOICES = [
+        (ALL, 'All'),
         (MAINS, 'Mains'),
         (SOUPS, 'Soups'),
         (SIDES, 'Sides'),
@@ -42,7 +44,7 @@ class Product(models.Model):
     type = models.CharField(max_length=5, choices=TYPE_CHOICES, default=MEAT)
     # ----TYPE----END------->
 
-    hot = models.IntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)])
+    hot = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     description = models.TextField(default='Description: ')
     image = models.ImageField(default='', upload_to='static/assets/img/products')
     # for these many persons

@@ -80,26 +80,25 @@
             <div class="col-lg-6 m-auto">
                 <h1 class="h1">Categories of The Month</h1>
                 <p>
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+                    What people love the most this month!!
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="{% static './assets/img/category_img_01.jpg' %}" class="rounded-circle img-fluid border"></a>
-                <h5 class="text-center mt-3 mb-3">Watches</h5>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <a href="#"><img src="{% static './assets/img/category_img_01.jpeg' %}" class="rounded-circle img-fluid border"></a>
+                <h5 class="text-center mt-3 mb-3">Desserts</h5>
+                <p class="text-center"><a class="btn btn-success" href="{% url 'filter_products' category='DE' %}">Go Shop</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="{% static './assets/img/category_img_02.jpg' %}" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Shoes</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <a href="#"><img src="{% static './assets/img/category_img_02.jpeg' %}" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Sides</h2>
+                <p class="text-center"><a class="btn btn-success" href="{% url 'filter_products' category='SI' %}">Go Shop</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="{% static './assets/img/category_img_03.jpg' %}" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <a href="#"><img src="{% static './assets/img/category_img_03.jpeg' %}" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Main Meals</h2>
+                <p class="text-center"><a class="btn btn-success" href="{% url 'filter_products' category='MA' %}">Go Shop</a></p>
             </div>
         </div>
     </section>
@@ -113,84 +112,53 @@
                 <div class="col-lg-6 m-auto">
                     <h1 class="h1">Featured Product</h1>
                     <p>
-                        Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident.
+                        We recommend these!!
                     </p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="{% static './assets/img/feature_prod_01.jpg' %}" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$240.00</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Gym Weight</a>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
-                            </p>
-                            <p class="text-muted">Reviews (24)</p>
+                 {% for product in products|slice:":3" %}
+<!--    <p>Rating: {{ product.rating }}</p>-->
+                    <div  class="col-md-4">
+                        <div class="card mb-4 product-wap rounded-0">
+                            <div class="card rounded-0">
+
+                               <img class="card-img rounded-0 img-fluid" src={{ product.image.url}} alt='{{ product.name }}'>
+                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                    <ul class="list-unstyled">
+                                        <li><a class="btn btn-success text-white" href=""><i class="far fa-heart"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href=""><i class="far fa-eye"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="{% url 'add_to_cart' product.id%}"><i class="fas fa-cart-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <a href="{% url 'product_detail' product.id %}" class="h3 text-decoration-none">{{ product.name }}</a>
+
+                                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                                    <li>Feeds <b>{{ product.size }}</b> person(s)</li>
+                                    <li class="pt-2">
+                                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+                                    </li>
+                                </ul>
+                                <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                    <li>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                    </li>
+                                </ul>
+                                <p class="text-center mb-0">{{ product.price }} C </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="{% static './assets/img/feature_prod_02.jpg' %}" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$480.00</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Cloud Nike Shoes</a>
-                            <p class="card-text">
-                                Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed, commodo ullamcorper.
-                            </p>
-                            <p class="text-muted">Reviews (48)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="{% static './assets/img/feature_prod_03.jpg' %}" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$360.00</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Summer Addides Shoes</a>
-                            <p class="card-text">
-                                Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et scelerisque ipsum lobortis nec.
-                            </p>
-                            <p class="text-muted">Reviews (74)</p>
-                        </div>
-                    </div>
-                </div>
+                    {% endfor %}
             </div>
         </div>
     </section>

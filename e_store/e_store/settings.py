@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'main',
     'static',
     'mycart',
+    'jinja2',
+    'user',
 
 
 ]
@@ -67,6 +69,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.csrf.CsrfViewMiddleware',
 
 ]
 
@@ -84,6 +87,15 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
+        },
+    },
+    {
+        'BACKEND': 'django_jinja.backend.Jinja2',
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'app_dirname': 'jinja2',
+            'match_extension': '.jinja',
+            'newstyle_gettext': True,
         },
     },
 ]

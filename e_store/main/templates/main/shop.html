@@ -14,12 +14,16 @@
                 <ul class="list-unstyled templatemo-accordion">
                     <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Type
+                            Category
                             <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul class="collapse show list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Meals</a></li>
+                            <li><a class="text-decoration-none" href="#">Mains</a></li>
+                            <li><a class="text-decoration-none" href="#">Soups</a></li>
+                            <li><a class="text-decoration-none" href="#">Sides</a></li>
+                            <li><a class="text-decoration-none" href="#">Salads</a></li>
                             <li><a class="text-decoration-none" href="#">Desserts</a></li>
+                            <li><a class="text-decoration-none" href="#">Drinks</a></li>
                         </ul>
                     </li>
 
@@ -29,19 +33,19 @@
                             <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Sport</a></li>
-                            <li><a class="text-decoration-none" href="#">Luxury</a></li>
+                            <li><a class="text-decoration-none" href="#">Sale 1</a></li>
+                            <li><a class="text-decoration-none" href="#">Sale 2</a></li>
                         </ul>
                     </li>
                     <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Product
+                            Type
                             <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Bag</a></li>
-                            <li><a class="text-decoration-none" href="#">Sweather</a></li>
-                            <li><a class="text-decoration-none" href="#">Sunglass</a></li>
+                            <li><a class="text-decoration-none" href="#">Meat</a></li>
+                            <li><a class="text-decoration-none" href="#">Vegeterian</a></li>
+                            <li><a class="text-decoration-none" href="#">Vegan</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -50,27 +54,27 @@
             <div class="col-lg-9">
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="category">Categories</label>
-                        <ul id="category" class="list-inline shop-top-menu pb-3 pt-1">
-                            <li value='AL' class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3"  href="{% url 'product_list' %}">All</a>
+
+                        <ul  class="list-inline shop-top-menu pb-3 pt-1">
+                            <li class="list-inline-item">
+                                <a class="h3 text-dark text-decoration-none mr-3"  href="{% url 'product_list'  %}">All</a>
                             </li>
-                            <li value='MA' class="list-inline-item">
+                            <li class="list-inline-item">
                                  <a class="h3 text-dark text-decoration-none mr-3"  href="{% url 'filter_products' category='MA' %}">Mains</a>
                             </li>
-                            <li value='SO' class="list-inline-item">
+                            <li  class="list-inline-item">
                                 <a class="h3 text-dark text-decoration-none"  href="{% url 'filter_products' category='SO' %}">Soups</a>
                             </li>
-                             <li value='SI' class="list-inline-item">
+                             <li class="list-inline-item">
                                 <a class="h3 text-dark text-decoration-none"   href="{% url 'filter_products' category='SI' %}">Sides</a>
                             </li>
-                             <li value='SA' class="list-inline-item">
+                             <li class="list-inline-item">
                                 <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='SA' %}">Salads</a>
                             </li>
-                             <li value='DE' class="list-inline-item">
+                             <li class="list-inline-item">
                                 <a class="h3 text-dark text-decoratinone"  href="{% url 'filter_products' category='DE' %}">Desserts</a>
                             </li>
-                             <li value='DR' class="list-inline-item">
+                             <li class="list-inline-item">
                                 <a class="h3 text-dark text-decoration-none" href="{% url 'filter_products' category='DR' %}">Drinks</a>
                             </li>
                         </ul>
@@ -107,7 +111,7 @@
                                     <ul class="list-unstyled">
                                         <li><a class="btn btn-success text-white" href=""><i class="far fa-heart"></i></a></li>
                                         <li><a class="btn btn-success text-white mt-2" href=""><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="{% url 'mycart:cart_add' product.id%}"><i class="fas fa-cart-plus"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="{% url 'add_to_cart' product.id%}"><i class="fas fa-cart-plus"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -115,7 +119,7 @@
                                 <a href="{% url 'product_detail' product.id %}" class="h3 text-decoration-none">{{ product.name }}</a>
 
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                    <li>M/L/X/XL</li>
+                                    <li>Feeds <b>{{ product.size }}</b> person(s)</li>
                                     <li class="pt-2">
                                         <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
                                         <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
