@@ -39,8 +39,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'beka.catering.services@gmail.com'
-EMAIL_HOST_PASSWORD = 'rzvventrfhtkqafh'
+EMAIL_HOST_USER = 'catering.beka@gmail.com'
+EMAIL_HOST_PASSWORD = 'rdvipwgjfjqpdyet'
 
 
 # Application definition
@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'main',
     'static',
-    'jinja2',
     'user',
 
 
@@ -86,15 +85,6 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
-        },
-    },
-    {
-        'BACKEND': 'django_jinja.backend.Jinja2',
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'app_dirname': 'jinja2',
-            'match_extension': '.jinja',
-            'newstyle_gettext': True,
         },
     },
 ]
@@ -142,9 +132,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 
 # Default primary key field type
