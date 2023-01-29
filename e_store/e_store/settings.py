@@ -32,7 +32,7 @@ SECRET_KEY = "django-insecure-vbgieg&v24$%1+%s#3x_dncw%mk#$t5p&kde+q*_u5e+6z-*j-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'main',
     'static',
-    'mycart',
     'jinja2',
     'user',
 
@@ -130,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = "ru-ru"
+LANGUAGE_CODE = "en-en"
 
 TIME_ZONE = "Asia/Bishkek"
 

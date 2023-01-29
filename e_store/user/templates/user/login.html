@@ -1,72 +1,46 @@
-<!--
-Author: Colorlib
-Author URL: https://colorlib.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}REGISTER PAGE{% endblock %}
+{% block title %}LOGIN PAGE{% endblock %}
 {% block div %}
-  <!-- Custom Theme files -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
-  <!-- //Custom Theme files -->
-  <!-- web font -->
-  <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
-  <!-- //web font -->
+
 {% endblock %}
 {% block content %}
+{% csrf_token %}
 
+<section class="vh-100" style="background-color: #eee;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-  <!-- main -->
-  <div class="main-w3layouts wrapper">
-    <h1>LOGIN</h1>
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
 
+                <form class="mx-1 mx-md-4" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    {% csrf_token %}
+                    <input type="submit" value="Login">
+                  </div>
 
-    <div class="main-agileinfo">
-      <div class="agileits-top">
-         <form method="post">
-           {% csrf_token %}
-            {{ form.as_p }}
-          <H5></H5>
+                </form>
 
-            <input type="submit" value="Log In">
-         </form>
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-        <p>Don't have an Account? <a href="#"> Login Now!</a></p>
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- copyright -->
-    <div class="colorlibcopy-agile">
-      <p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
-    </div>
-    <!-- //copyright -->
-    <ul class="colorlib-bubbles">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
   </div>
-  <!-- //main -->
-
-{% endblock %}
-
-{% block scripts %}
-<script type="application/x-javascript">
-    addEventListener("load", function() {
-      setTimeout(hideURLbar, 0);
-    }, false);
-
-    function hideURLbar() {
-      window.scrollTo(0, 1);
-    }
-  </script>
+</section>
 
 {% endblock %}

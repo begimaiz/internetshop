@@ -11,7 +11,6 @@ from django.contrib import messages, auth
 from django.contrib.auth import authenticate
 from .forms import ContactForm
 from . import forms
-from mycart import views
 
 
 def index(request):

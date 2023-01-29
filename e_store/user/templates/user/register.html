@@ -1,81 +1,38 @@
-<!--
-Author: Colorlib
-Author URL: https://colorlib.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 {% extends "main/base.html" %}
 {% load static %}
 {% block title %}REGISTER PAGE{% endblock %}
-{% block div %}
-  <!-- Custom Theme files -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
-  <!-- //Custom Theme files -->
-  <!-- web font -->
-  <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
-  <!-- //web font -->
-{% endblock %}
+
 {% block content %}
-
-
-  <!-- main -->
-  <div class="main-w3layouts wrapper">
-    <h1>REGISTER</h1>
-
-
-    <div class="main-agileinfo">
-      <div class="agileits-top">
-
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-
-
-          <div class="wthree-text">
-            <label class="anim">
-              <input type="checkbox" class="checkbox" required="">
-              <span>I Agree To The Terms & Conditions</span>
-            </label>
-            <div class="clear"> </div>
-          </div>
 {% csrf_token %}
-          <input type="submit" value="Register">
+ <div class="container-fluid bg-light py-5">
+        <div class="col-md-6 m-auto text-center">
+            <div class="card">
+            <div class="card-body">
 
-        </form>
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Register</p>
 
-      </div>
-    </div>
-    <!-- copyright -->
-    <div class="colorlibcopy-agile">
-      <p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
-    </div>
-    <!-- //copyright -->
-    <ul class="colorlib-bubbles">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-  </div>
-  <!-- //main -->
 
-{% endblock %}
+                <form class="mx-1 mx-md-4" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                  <div class="form-check d-flex justify-content-center mb-5">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                    <label class="form-check-label" for="form2Example3">
+                      I agree all statements in <a href="#!">Terms of service</a>
+                    </label>
+                  </div>
 
-{% block scripts %}
-<script type="application/x-javascript">
-    addEventListener("load", function() {
-      setTimeout(hideURLbar, 0);
-    }, false);
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    {% csrf_token %}
+                    <input type="submit" value="Register">
+                  </div>
 
-    function hideURLbar() {
-      window.scrollTo(0, 1);
-    }
-  </script>
+                </form>
+
+              </div>
+
+            </div>
+          </div>
+ </div>
 
 {% endblock %}
