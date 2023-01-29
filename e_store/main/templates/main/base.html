@@ -103,10 +103,12 @@ https://templatemo.com/tm-559-zay-shop
                     </a>
 
                     {% if user.is_authenticated %}
-                    <h5 class="nav-icon position-relative text-decoration-none" >Welcome {{ user.username }} ! </h5>
+                        <h5 class="nav-icon position-relative text-decoration-none">Welcome {{ user.username }} !</h5>
+                        <a class="nav-icon position-relative text-decoration-none" href="{% url 'logout_view' %}">Log Out</a>
+                    {% else %}
+                        <a class="nav-icon position-relative text-decoration-none" href="{% url 'login_view' %}">Log In</a>
+                        <a class="nav-icon position-relative text-decoration-none" href="{% url 'register' %}">Register</a>
                     {% endif %}
-                    <a class="nav-icon position-relative text-decoration-none" href="{% url 'login' %}">Log In </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="{% url 'register' %}">Register</a>
                 </div>
             </div>
 
@@ -219,10 +221,7 @@ https://templatemo.com/tm-559-zay-shop
             <div class="container">
                 <div class="row pt-2">
                     <div class="col-12">
-                        <p class="text-left text-light">
-                            Copyright &copy; 2021 Company Name
-                            | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
-                        </p>
+
                     </div>
                 </div>
             </div>

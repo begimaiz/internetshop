@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import  AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -7,7 +7,7 @@ from main.models import Product
 from django.contrib.auth.decorators import login_required
 from .forms import UserCreationForm
 
-@login_required
+@login_required(login_url='login_view')
 def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
     cart, created_cart = Cart.objects.get_or_create(user=request.user)
@@ -24,7 +24,7 @@ def add_to_cart(request, product_id):
 
     return redirect(reverse('view_cart'))
 
-@login_required
+
 def remove_from_cart(request, product_id):
     try:
         product = Product.objects.get(id=product_id)
@@ -42,7 +42,7 @@ def remove_from_cart(request, product_id):
         pass
     return redirect(reverse('view_cart'))
 
-@login_required
+
 def view_cart(request):
     cart_items = CartItem.objects.filter(cart__user=request.user.id)
     total = 0
@@ -54,7 +54,7 @@ def view_cart(request):
 
     return render(request, 'user/cart.html', context)
 
-@login_required
+
 def filter_cart_items(request):
     cart_items = CartItem.objects.select_related('product').filter(cart__user=request.user).order_by('product__price')
     total = 0
@@ -66,6 +66,7 @@ def filter_cart_items(request):
 
     return render(request, 'user/cart.html', context)
 
+@login_required(login_url='login_view')
 def checkout(request, order_id):
     order = Order.objects.get(id=order_id)
     context = {
@@ -73,7 +74,7 @@ def checkout(request, order_id):
     }
     return render(request, 'user/checkout.html', context)
 
-
+@login_required(login_url='login_view')
 def user(request):
     orders = Order.objects.filter(user=request.user)
     cart = Cart.objects.filter(user=request.user)
@@ -108,7 +109,7 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'user/login.html', {'form': form})
 
-
+@login_required(login_url='login_view')
 def order(request, subtotal):
     # Retrieve the cart for the current user
     cart = Cart.objects.filter(user=request.user).first()
@@ -125,3 +126,8 @@ def order(request, subtotal):
     }
 
     return render(request, 'user/checkout.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'main/index.html')
